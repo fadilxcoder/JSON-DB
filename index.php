@@ -1,12 +1,12 @@
 <?php
 
     # REQUIREMENT
-    require 'functions.php';
     require 'vendor/autoload.php';
+    require 'functions.php';
 
     # NAMESPACE
     use Tracy\Debugger;
-    // Debugger::enable(Debugger::DEVELOPMENT);
+    // Debugger::enable(Debugger::DEVELOPMENT); # Disabled due to JSON extension in chrome
 
     foreach (selectAll() as $data) :
 
@@ -19,7 +19,15 @@
         // dump($newArr['version']); # 7
         
     endforeach;
+
+    $resp = selectAll();
+    $result = json_decode($resp[0]['configuration']);
     
     // Converting to JSON representation of supplied argument
-    echo json_encode(["HTTP" => 200]);
+    echo json_encode([
+        'HTTP' => 200,
+        'allow' => $result->allow,
+        'version' => $result->allow,
+        'language' => $result->language,
+    ]);
 ?>
