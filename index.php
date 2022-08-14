@@ -22,6 +22,7 @@
 
     $resp = selectAll();
     $result = json_decode($resp[0]['configuration']);
+    $jsonResp = selectFromJson();
     
     // Converting to JSON representation of supplied argument
     echo json_encode([
@@ -29,5 +30,6 @@
         'allow' => $result->allow,
         'version' => $result->allow,
         'language' => $result->language,
+        'Code' => $jsonResp[0]['phonetic_code']
     ]);
 ?>

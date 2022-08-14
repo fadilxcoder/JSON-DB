@@ -25,6 +25,19 @@
         return $result;
     }
 
+    function selectFromJson()
+    {
+        global $connection;
+        $sql = "
+            SELECT `configuration`->>'$.nato_phonetic' AS phonetic_code
+            FROM `json_configs`
+            WHERE `configuration`->>'$.unit' = 786
+        ";
+        $query  = $connection->query($sql);
+        $result = converter($query);
+        return $result;
+    }
+
     function insert($tbl, $data)
     {
         global $connection;
